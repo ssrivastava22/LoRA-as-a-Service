@@ -15,7 +15,7 @@ import logging
 def train(model_name, dataset_path, output_dir, config):
     tokenizer = AutoTokenizer.from_pretrained(model_name)
     tokenizer.pad_token = tokenizer.eos_token
-    model = AutoModelForCausalLM.from_pretrained(model_name, torch_dtype=torch.float16)
+    model = AutoModelForCausalLM.from_pretrained(model_name, load_in_8bit=True, torch_dtype=torch.float16)
 
     lora_config = LoraConfig(
         r = config.get("r", 8),
